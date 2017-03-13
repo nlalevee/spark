@@ -363,7 +363,7 @@ class ParquetFileFormat
           fileSplit.getLocations,
           null)
 
-      val attemptId = new TaskAttemptID(new TaskID(new JobID(), TaskType.MAP, 0), 0)
+      val attemptId = new TaskAttemptID(new TaskID(new JobID(), true, 0), 0)
       val hadoopAttemptContext =
         new TaskAttemptContextImpl(broadcastedHadoopConf.value.value, attemptId)
 

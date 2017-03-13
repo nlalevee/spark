@@ -2578,6 +2578,22 @@
     </profile>
 
     <profile>
+      <id>hadoop-2.6.0-mr1-cdh5.10.0</id>
+      <properties>
+        <hadoop.version>2.6.0-mr1-cdh5.10.0</hadoop.version>
+        <jets3t.version>0.9.3</jets3t.version>
+        <zookeeper.version>3.4.6</zookeeper.version>
+        <curator.version>2.6.0</curator.version>
+      </properties>
+      <repositories>
+        <repository>
+          <id>cloudera</id>
+          <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+      </repositories>
+    </profile>
+
+    <profile>
       <id>yarn</id>
       <modules>
         <module>yarn</module>
@@ -2785,6 +2801,18 @@
           </releases>
         </repository>
       </repositories>
+    </profile>
+
+    <profile>
+      <id>hive-1.2</id>
+      <properties>
+          <hive.group>org.apache.hive</hive.group>
+          <hive.version>1.2.1</hive.version>
+          <hive.version.short>1.2.1</hive.version.short>
+          <derby.version>10.12.1.1</derby.version>
+          <parquet.version>1.8.1</parquet.version>
+          <hive.parquet.version>1.6.0</hive.parquet.version>
+      </properties>
     </profile>
 
     <!--

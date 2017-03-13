@@ -381,7 +381,7 @@ private[spark] object HadoopRDD extends Logging {
   def addLocalConfiguration(jobTrackerId: String, jobId: Int, splitId: Int, attemptId: Int,
                             conf: JobConf) {
     val jobID = new JobID(jobTrackerId, jobId)
-    val taId = new TaskAttemptID(new TaskID(jobID, TaskType.MAP, splitId), attemptId)
+    val taId = new TaskAttemptID(new TaskID(jobID, true, splitId), attemptId)
 
     conf.set("mapred.tip.id", taId.getTaskID.toString)
     conf.set("mapred.task.id", taId.toString)

@@ -130,7 +130,7 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
 
   private def getJobContext(): JobContext = {
     if (jobContext == null) {
-      jobContext = new JobContextImpl(conf.value, jID.value)
+      jobContext = new HackedJobContextImpl(conf.value, jID.value)
     }
     jobContext
   }
@@ -145,7 +145,7 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
   protected def newTaskAttemptContext(
       conf: JobConf,
       attemptId: TaskAttemptID): TaskAttemptContext = {
-    new TaskAttemptContextImpl(conf, attemptId)
+    new HackedTaskAttemptContextImpl(conf, attemptId)
   }
 
   private def setIDs(jobid: Int, splitid: Int, attemptid: Int) {
@@ -155,7 +155,7 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
 
     jID = new SerializableWritable[JobID](SparkHadoopWriter.createJobID(now, jobid))
     taID = new SerializableWritable[TaskAttemptID](
-        new TaskAttemptID(new TaskID(jID.value, TaskType.MAP, splitID), attemptID))
+        new TaskAttemptID(new TaskID(jID.value, true, splitID), attemptID))
   }
 }
 

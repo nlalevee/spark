@@ -76,8 +76,8 @@ private[hive] class SparkHiveWriterContainer(
 
   @transient private var writer: FileSinkOperator.RecordWriter = null
   @transient protected lazy val committer = conf.value.getOutputCommitter
-  @transient protected lazy val jobContext = new JobContextImpl(conf.value, jID.value)
-  @transient private lazy val taskContext = new TaskAttemptContextImpl(conf.value, taID.value)
+  @transient protected lazy val jobContext = new HackedJobContextImpl(conf.value, jID.value)
+  @transient private lazy val taskContext = new HackedTaskAttemptContextImpl(conf.value, taID.value)
   @transient private lazy val outputFormat =
     conf.value.getOutputFormat.asInstanceOf[HiveOutputFormat[AnyRef, Writable]]
 
@@ -144,7 +144,7 @@ private[hive] class SparkHiveWriterContainer(
 
     jID = new SerializableWritable[JobID](SparkHadoopWriter.createJobID(now, jobId))
     taID = new SerializableWritable[TaskAttemptID](
-      new TaskAttemptID(new TaskID(jID.value, TaskType.MAP, splitID), attemptID))
+      new TaskAttemptID(new TaskID(jID.value, true, splitID), attemptID))
   }
 
   private def setConfParams() {
