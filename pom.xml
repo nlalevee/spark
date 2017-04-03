@@ -2578,9 +2578,9 @@
     </profile>
 
     <profile>
-      <id>hadoop-2.6.0-mr1-cdh5.10.0</id>
+      <id>hadoop-2.6.0-mr1-cdh5.10.1</id>
       <properties>
-        <hadoop.version>2.6.0-mr1-cdh5.10.0</hadoop.version>
+        <hadoop.version>2.6.0-mr1-cdh5.10.1</hadoop.version>
         <jets3t.version>0.9.3</jets3t.version>
         <zookeeper.version>3.4.6</zookeeper.version>
         <curator.version>2.6.0</curator.version>

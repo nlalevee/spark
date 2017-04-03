@@ -34,7 +34,7 @@ For general development tips, including info on developing Spark using an IDE, s
 
 ### CDH Build
 
-    build/mvn -DskipTests clean package -Phadoop-2.6.0-mr1-cdh5.10.0 -Phive -Phive-1.2 -Pscala-2.11 -Punix
+    build/mvn -DskipTests clean package -Phadoop-2.6.0-mr1-cdh5.10.1 -Phive -Phive-1.2 -Pscala-2.11 -Punix
 
 ## Interactive Scala Shell
 
