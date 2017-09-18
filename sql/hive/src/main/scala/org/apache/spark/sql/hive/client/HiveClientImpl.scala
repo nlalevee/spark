@@ -188,6 +188,8 @@ private[hive] class HiveClientImpl(
         if (clientLoader.cachedHive != null) {
           Hive.set(clientLoader.cachedHive.asInstanceOf[Hive])
         }
+        // ensure that the MetadataStore is instanciated with the proper classloader
+        Hive.get(new HiveConf(state.getConf)).getMSC
         SessionState.start(state)
         state.out = new PrintStream(outputBuffer, true, "UTF-8")
         state.err = new PrintStream(outputBuffer, true, "UTF-8")

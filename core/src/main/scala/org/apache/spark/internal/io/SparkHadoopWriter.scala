@@ -21,10 +21,8 @@ import java.io.IOException
 import java.text.{NumberFormat, SimpleDateFormat}
 import java.util.{Date, Locale}
 
-import org.apache.hadoop.fs.FileSystem
+import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.hadoop.mapred._
-import org.apache.hadoop.mapreduce.TaskType
-
 import org.apache.spark.SerializableWritable
 import org.apache.spark.internal.Logging
 import org.apache.spark.mapred.SparkHadoopMapRedUtil
@@ -129,7 +127,7 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
 
   private def getJobContext(): JobContext = {
     if (jobContext == null) {
-      jobContext = new JobContextImpl(conf.value, jID.value)
+      jobContext = new HackedJobContextImpl(conf.value, jID.value)
     }
     jobContext
   }
@@ -144,7 +142,7 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
   protected def newTaskAttemptContext(
       conf: JobConf,
       attemptId: TaskAttemptID): TaskAttemptContext = {
-    new TaskAttemptContextImpl(conf, attemptId)
+    new HackedTaskAttemptContextImpl(conf, attemptId)
   }
 
   private def setIDs(jobid: Int, splitid: Int, attemptid: Int) {
@@ -154,6 +152,27 @@ class SparkHadoopWriter(jobConf: JobConf) extends Logging with Serializable {
 
     jID = new SerializableWritable[JobID](SparkHadoopWriterUtils.createJobID(now, jobid))
     taID = new SerializableWritable[TaskAttemptID](
-        new TaskAttemptID(new TaskID(jID.value, TaskType.MAP, splitID), attemptID))
+        new TaskAttemptID(new TaskID(jID.value, true, splitID), attemptID))
+  }
+}
+
+private[spark]
+object SparkHadoopWriter {
+  def createJobID(time: Date, id: Int): JobID = {
+    val formatter = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US)
+    val jobtrackerID = formatter.format(time)
+    new JobID(jobtrackerID, id)
+  }
+
+  def createPathFromString(path: String, conf: JobConf): Path = {
+    if (path == null) {
+      throw new IllegalArgumentException("Output path is null")
+    }
+    val outputPath = new Path(path)
+    val fs = outputPath.getFileSystem(conf)
+    if (fs == null) {
+      throw new IllegalArgumentException("Incorrectly formatted output path")
+    }
+    outputPath.makeQualified(fs.getUri, fs.getWorkingDirectory)
   }
 }
