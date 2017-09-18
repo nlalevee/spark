@@ -225,7 +225,7 @@ object FileFormatWriter extends Logging {
       iterator: Iterator[InternalRow]): WriteTaskResult = {
 
     val jobId = SparkHadoopWriterUtils.createJobID(new Date, sparkStageId)
-    val taskId = new TaskID(jobId, TaskType.MAP, sparkPartitionId)
+    val taskId = new TaskID(jobId, true, sparkPartitionId)
     val taskAttemptId = new TaskAttemptID(taskId, sparkAttemptNumber)
 
     // Set up the attempt context required to use in the output committer.

@@ -40,7 +40,7 @@ class HadoopFileLinesReader(
       file.length,
       // TODO: Implement Locality
       Array.empty)
-    val attemptId = new TaskAttemptID(new TaskID(new JobID(), TaskType.MAP, 0), 0)
+    val attemptId = new TaskAttemptID(new TaskID(new JobID(), true, 0), 0)
     val hadoopAttemptContext = new TaskAttemptContextImpl(conf, attemptId)
     val reader = new LineRecordReader()
     reader.initialize(fileSplit, hadoopAttemptContext)

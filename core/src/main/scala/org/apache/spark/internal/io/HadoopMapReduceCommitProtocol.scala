@@ -123,7 +123,7 @@ class HadoopMapReduceCommitProtocol(jobId: String, path: String)
   override def setupJob(jobContext: JobContext): Unit = {
     // Setup IDs
     val jobId = SparkHadoopWriterUtils.createJobID(new Date, 0)
-    val taskId = new TaskID(jobId, TaskType.MAP, 0)
+    val taskId = new TaskID(jobId, true, 0)
     val taskAttemptId = new TaskAttemptID(taskId, 0)
 
     // Set up the configuration object

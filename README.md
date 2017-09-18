@@ -31,6 +31,11 @@ More detailed documentation is available from the project site, at
 
 For general development tips, including info on developing Spark using an IDE, see ["Useful Developer Tools"](http://spark.apache.org/developer-tools.html).
 
+### CDH Build
+
+    build/mvn -DskipTests clean package -Phadoop-2.6.0-mr1-cdh5.12.1 -Phive -Pscala-2.11 -Punix
+    dev/make-distribution.sh --name hadoop-2.6.0-mr1-cdh5.12.1 --tgz -Phadoop-2.6.0-mr1-cdh5.12.1 -Phive -Pscala-2.11 -Punix
+
 ## Interactive Scala Shell
 
 The easiest way to start using Spark is through the Scala shell:
