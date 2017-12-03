@@ -2525,17 +2525,17 @@
     </profile>
 
     <profile>
-      <id>hadoop-2.6.0-mr1-cdh5.12.1</id>
+      <id>hadoop-2.6.0-mr1-cdh5.13.0</id>
       <properties>
-        <hadoop.version>2.6.0-mr1-cdh5.12.1</hadoop.version>
+        <hadoop.version>2.6.0-mr1-cdh5.13.0</hadoop.version>
         <jets3t.version>0.9.3</jets3t.version>
         <zookeeper.version>3.4.6</zookeeper.version>
         <curator.version>2.6.0</curator.version>
         <hive.group>org.apache.hive</hive.group>
-        <hive.version>1.1.0-cdh5.12.1</hive.version>
+        <hive.version>1.1.0-cdh5.13.0</hive.version>
         <hive.version.short>1.1.0</hive.version.short>
         <derby.version>10.11.1.1</derby.version>
-        <hive.parquet.version>1.5.0-cdh5.12.1</hive.parquet.version>
+        <hive.parquet.version>1.5.0-cdh5.13.0</hive.parquet.version>
       </properties>
       <repositories>
         <repository>
